@@ -4,9 +4,6 @@ from db import query_all, query_one, execute
 coins_bp = Blueprint("coins", __name__)
 
 
-# -----------------------------
-# Helper: get user id from header
-# -----------------------------
 def get_user_id():
     user_id = request.headers.get("X-User-Id")
     if not user_id:
@@ -16,10 +13,6 @@ def get_user_id():
     except ValueError:
         return None
 
-
-# -----------------------------
-# GET /coins  (List favourites)
-# -----------------------------
 @coins_bp.route("/coins", methods=["GET"])
 def get_favourites():
     user_id = get_user_id()
@@ -41,10 +34,6 @@ def get_favourites():
     rows = query_all(sql, [user_id])
     return jsonify({"items": rows}), 200
 
-
-# -----------------------------
-# POST /coins  (Add favourite)
-# -----------------------------
 @coins_bp.route("/coins", methods=["POST"])
 def add_favourite():
     user_id = get_user_id()
@@ -95,9 +84,6 @@ def add_favourite():
     return jsonify(new_row), 201
 
 
-# -----------------------------
-# PUT /coins/<id>  (Update favourite)
-# -----------------------------
 @coins_bp.route("/coins/<int:fav_id>", methods=["PUT"])
 def update_favourite(fav_id):
     user_id = get_user_id()
@@ -160,3 +146,4 @@ def delete_favourite(fav_id):
         return jsonify({"error": "Favourite not found"}), 404
 
     return "", 204
+
