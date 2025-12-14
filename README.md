@@ -43,3 +43,69 @@ The project demonstrates:
 ---
 
 ## Project Structure
+bitcoin-app/
+app.py
+api.py
+db.py
+external_api.py
+templates/
+index.html
+static/
+(optional CSS / JS)
+
+
+---
+
+## How to Run (Windows / PowerShell)
+
+### 1) Create and activate virtual environment
+```powershell
+python -m venv venv
+.\venv\Scripts\activate
+
+2) Install dependencies
+pip install -r requirements.txt
+
+3) Run the application
+python app.py
+
+
+Open in browser:
+
+http://127.0.0.1:5000
+
+REST API Usage (CRUD)
+
+All requests are user-specific using the header:
+
+X-User-Id: 1
+
+GET – List favourites
+Invoke-RestMethod -Uri "http://127.0.0.1:5000/coins" -Method Get -Headers @{ "X-User-Id" = "1" }
+
+POST – Add favourite (example: Bitcoin)
+Invoke-RestMethod -Uri "http://127.0.0.1:5000/coins" -Method Post -Headers @{ "X-User-Id" = "1" } -ContentType "application/json" -Body '{"symbol":"btc"}'
+
+PUT – Update favourite (example: favourite id 5 → Ethereum)
+Invoke-RestMethod -Uri "http://127.0.0.1:5000/coins/5" -Method Put -Headers @{ "X-User-Id" = "1" } -ContentType "application/json" -Body '{"symbol":"eth"}'
+
+DELETE – Remove favourite
+
+Delete by favourite ID:
+
+Invoke-RestMethod -Uri "http://127.0.0.1:5000/coins/5" -Method Delete -Headers @{ "X-User-Id" = "1" }
+
+
+Delete by symbol (if enabled):
+
+Invoke-RestMethod -Uri "http://127.0.0.1:5000/coins/btc" -Method Delete -Headers @{ "X-User-Id" = "1" }
+
+External API Endpoints (CoinGecko)
+Live prices
+Invoke-RestMethod -Uri "http://127.0.0.1:5000/coins/live-prices" -Method Get
+
+Coin details
+
+Example:
+
+Invoke-RestMethod -Uri "http://127.0.0.1:5000/coins/bitcoin/external-info" -Method Get
