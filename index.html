@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bitcoin Favourites</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div>
+        <h1>Crypto Favourites</h1>
+        <p class="sub">Save coins per user, view live prices from CoinGecko.</p>
+      </div>
+
+      <div class="userbox">
+        <label>User ID</label>
+        <input id="userId" value="1" />
+      </div>
+    </header>
+
+    <section class="card">
+      <h2>Add favourite</h2>
+      <div class="row">
+        <input id="symbolInput" placeholder="e.g. btc, eth, sol" />
+        <button id="addBtn" class="btn primary">Add</button>
+        <button id="loadBtn" class="btn">Reload</button>
+      </div>
+      <div id="msg" class="msg"></div>
+    </section>
+
+    <section class="card">
+      <div class="cardHead">
+        <h2>My favourites</h2>
+        <span id="count" class="pill">0</span>
+      </div>
+
+      <div id="list" class="grid"></div>
+      <div id="empty" class="empty">No favourites yet. Add one above 👆</div>
+    </section>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
