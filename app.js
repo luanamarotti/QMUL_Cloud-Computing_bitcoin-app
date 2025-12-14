@@ -62,10 +62,7 @@ async function loadCoins() {
 
   $("empty").style.display = items.length ? "none" : "block";
 
-  // Build coin IDs for live prices (CoinGecko ids might be needed; if your DB stores symbol only,
-  // we’ll call external-info per symbol -> ID mapping.
-  // EASIEST: if your API already returns coin name+symbol, we’ll query CoinGecko by symbol using external-info route if you built it that way.
-  // For now, we’ll just show symbol + name, and try to fetch live price for "bitcoin" if symbol is btc.
+
   for (const c of items) {
     const card = document.createElement("div");
     card.className = "coin";
@@ -95,9 +92,7 @@ async function loadCoins() {
 
     list.appendChild(card);
 
-    // Try to show live price using your external info route if it exists:
-    // Example route shown in your earlier file: /coins/<coin_id>/external-info
-    // If you stored symbol, you can map btc->bitcoin quickly:
+   
     const map = { btc: "bitcoin", eth: "ethereum", sol: "solana", ada: "cardano", xrp: "ripple", doge: "dogecoin" };
     const coinId = map[(c.symbol || "").toLowerCase()];
     if (!coinId) continue;
@@ -137,4 +132,5 @@ $("loadBtn").onclick = () => loadCoins().catch(e => msg("Load failed.", "err"));
 $("addBtn").onclick = () => addCoin().catch(e => msg("Add failed.", "err"));
 
 // Auto-load on open
+
 loadCoins().catch(() => {});
