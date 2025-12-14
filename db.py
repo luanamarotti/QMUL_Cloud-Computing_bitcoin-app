@@ -6,7 +6,7 @@ DB_PATH = Path(__file__).with_name("cryptodb.sqlite3")
 
 def get_connection():
     conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row  # rows behave like dicts
+    conn.row_factory = sqlite3.Row 
     return conn
 
 
@@ -49,8 +49,6 @@ def execute(sql, params=None):
     finally:
         conn.close()
 
-
-# ---------- DB INIT (run once on import) ----------
 
 def init_db():
     conn = get_connection()
@@ -116,5 +114,5 @@ def init_db():
         conn.close()
 
 
-# Run initialization when module is imported
 init_db()
+
