@@ -21,12 +21,10 @@ def fetch_external_coin_data(endpoint: str, params: dict | None = None):
     try:
         resp = requests.get(url, params=params, timeout=5)
     except requests.exceptions.RequestException as e:
-        # Network / timeout / DNS errors
         raise ExternalAPIError(f"Error connecting to external crypto API: {e}", status_code=503)
 
     if not resp.ok:
-        # Non-2xx from CoinGecko
-        # Optional: treat 404 specially if you want
+
         if resp.status_code == 404:
             raise ExternalAPIError("Coin not found in external API", status_code=404)
         raise ExternalAPIError(
@@ -119,3 +117,4 @@ def get_coin_external_info(coin_id):
         "source": "coingecko",
         "data": normalized
     }), 200
+
