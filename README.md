@@ -77,7 +77,7 @@ static/
 
 ## How to Run (Windows / PowerShell)
 
-### 1) Create and activate virtual environment
+1) Create and activate virtual environment
 ```powershell
 python -m venv venv
 .\venv\Scripts\activate
@@ -128,4 +128,5 @@ Coin details
 Example:
 
 Invoke-RestMethod -Uri "http://127.0.0.1:5000/coins/bitcoin/external-info" -Method Get
+
 
